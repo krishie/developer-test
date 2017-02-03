@@ -14,5 +14,7 @@ namespace OrangeBricks.Web.Controllers.Property.ViewModels
         public int OfferAmount { get; set; }
         public bool IsOfferAcceptedForLoggedInUser { get; set; }
         public DateTime AcceptedDateTime { get; set; }
+        public bool IsViewingByLoggedInUser { get; set; }
+        public DateTime ViewingDate { get; set; }
     }
 }

@@ -20,7 +20,8 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
         {
             var properties = _context.Properties
                 .Where(p => p.IsListedForSale)
-                .Include(x => x.Offers);
+                .Include(x => x.Offers)
+                .Include(x => x.Viewings);
 
             if (!string.IsNullOrWhiteSpace(query.Search))
             {
@@ -43,6 +44,8 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
         private static PropertyViewModel MapViewModel(Models.Property property)
         {
             var userOffer = (property.Offers == null ? null : property.Offers.Where(o => o.OfferedByUserId == _currentUser).FirstOrDefault());
+            var userViewing = (property.Viewings == null ? null : property.Viewings.Where(o => o.RequestUserId == _currentUser).FirstOrDefault());
+
             return new PropertyViewModel
             {
                 Id = property.Id,
@@ -53,7 +56,9 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 IsOfferedByLoggedInUser = (userOffer != null),
                 OfferAmount = (userOffer == null ? 0 : userOffer.Amount),
                 IsOfferAcceptedForLoggedInUser = (userOffer != null && userOffer.Status == OfferStatus.Accepted),
-                AcceptedDateTime = (userOffer == null ? default(DateTime) : userOffer.UpdatedAt)
+                AcceptedDateTime = (userOffer == null ? default(DateTime) : userOffer.UpdatedAt),
+                IsViewingByLoggedInUser = (userViewing != null),
+                ViewingDate = (userViewing == null ? default(DateTime) : userViewing.RequestDate),
             };
         }
     }

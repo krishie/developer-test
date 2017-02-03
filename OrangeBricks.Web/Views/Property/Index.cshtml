@@ -42,5 +42,15 @@
         <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
             Make Offer
         </a>
+        if (property.IsViewingByLoggedInUser)
+        {
+            <div class="alert alert-info" role="alert">Viewing requested on @property.ViewingDate</div>
+        }
+        else
+        {
+            <a href="@Url.Action("RequestViewing", "Property", new { id = property.Id })" class="btn btn-primary">
+                Request Viewing
+            </a>
+        }
     }
 }

@@ -5,3 +5,5 @@ Select * From Properties
 --update Offers set OfferedByUserId='c0c36ff7-27ef-4937-ad05-dd789b8a3d5f' where id=1
 --Update Offers Set Amount = 200000 Where ID = 1
 Select * From AspNetUsers
+
+Select * From Viewings
