@@ -29,8 +29,18 @@
     <h3>@property.StreetName</h3>
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
-
-    <a href="@Url.Action("MakeOffer", "Property", new {id = property.Id})" class="btn btn-primary">
-        Make Offer
-    </a>
+    if (property.IsOfferedByLoggedInUser)
+    {
+        <div class="alert alert-info" role="alert">Offered for @property.OfferAmount</div>
+        if (property.IsOfferAcceptedForLoggedInUser)
+        {
+            <div class="alert alert-success" role="alert">Congratulations! Your offer is accepted by seller on @property.AcceptedDateTime.</div>
+        }
+    }
+    else
+    {
+        <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
+            Make Offer
+        </a>
+    }
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace OrangeBricks.Web.Controllers.Property.ViewModels
 {
     public class PropertyViewModel
@@ -8,5 +10,9 @@ namespace OrangeBricks.Web.Controllers.Property.ViewModels
         public string PropertyType { get; set; }
         public int Id { get; set; }
         public bool IsListedForSale { get; set; }
+        public bool IsOfferedByLoggedInUser { get; set; }
+        public int OfferAmount { get; set; }
+        public bool IsOfferAcceptedForLoggedInUser { get; set; }
+        public DateTime AcceptedDateTime { get; set; }
     }
 }
