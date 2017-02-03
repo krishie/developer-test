@@ -22,7 +22,8 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
                 Amount = command.Offer,
                 Status = OfferStatus.Pending,
                 CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
+                UpdatedAt = DateTime.Now,
+                OfferedByUserId = command.OfferByUserId
             };
 
             if (property.Offers == null)
