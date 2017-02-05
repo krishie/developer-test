@@ -29,28 +29,31 @@
     <h3>@property.StreetName</h3>
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
-    if (property.IsOfferedByLoggedInUser)
+    if (User.IsInRole("Buyer"))
     {
+        if (property.IsOfferedByLoggedInUser)
+        {
         <div class="alert alert-info" role="alert">Offered for @property.OfferAmount</div>
-        if (property.IsOfferAcceptedForLoggedInUser)
-        {
-            <div class="alert alert-success" role="alert">Congratulations! Your offer is accepted by seller on @property.AcceptedDateTime.</div>
-        }
-    }
-    else
-    {
-        <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
-            Make Offer
-        </a>
-        if (property.IsViewingByLoggedInUser)
-        {
-            <div class="alert alert-info" role="alert">Viewing requested on @property.ViewingDate</div>
+            if (property.IsOfferAcceptedForLoggedInUser)
+            {
+            <div class="alert alert-success" role="alert">Congratulations! Your offer is accepted by seller on @property.AcceptedDateTime.ToString("dd'/'MM'/'yyyy hh:mm tt").</div>
+            }
         }
         else
         {
+        <a href="@Url.Action("MakeOffer", "Property", new { id = property.Id })" class="btn btn-primary">
+            Make Offer
+        </a>
+            if (property.IsViewingByLoggedInUser)
+            {
+            <div class="alert alert-info" role="alert">Viewing requested on @property.ViewingDate.ToString("dd'/'MM'/'yyyy hh:mm tt")</div>
+            }
+            else
+            {
             <a href="@Url.Action("RequestViewing", "Property", new { id = property.Id })" class="btn btn-primary">
                 Request Viewing
             </a>
+            }
         }
     }
 }
